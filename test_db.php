@@ -2,7 +2,7 @@
 // test_db.php
 $host = 'localhost';
 $user = 'root';
-$pass = '0000';      // put your MySQL password if any
+$pass = '';      
 $dbname = 'bookstore';
 
 // Create connection
