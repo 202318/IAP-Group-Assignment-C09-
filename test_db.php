@@ -1,27 +1,14 @@
 <?php
-// test_db.php
-$host = 'localhost';
-$user = 'root';
-$pass = '';      
-$dbname = 'bookstore';
+include 'db_conn.php';
 
-// Create connection
-$mysqli = new mysqli($host, $user, $pass, $dbname);
+$database = new Database();
+$conn = $database->connect();
 
-// Check connection
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-} else {
-    echo "Database connected successfully!";
+if ($conn) {
+    echo "<br>Tables in Bookstore:<br>";
+    $result = $conn->query("SHOW TABLES");
+    while ($row = $result->fetch_array()) {
+        echo $row[0] . "<br>";
+    }
 }
-
-// Optional: list all books
-$result = $mysqli->query("SELECT * FROM books");
-while($row = $result->fetch_assoc()){
-    echo "<pre>";
-    print_r($row);
-    echo "</pre>";
-}
-
-$mysqli->close();
 ?>
