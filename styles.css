@@ -1,0 +1,33 @@
+body {
+  background-color: #f9f9f9;
+  font-family: "Poppins", sans-serif;
+}
+
+.card {
+  background-color: #f6fff8;
+}
+
+.btn-primary {
+  background-color: #b5eaea;
+  border: none;
+  color: #222;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #edf6f9;
+  color: #000;
+}
+
+.form-control:focus {
+  border-color: #b5eaea;
+  box-shadow: 0 0 5px #b5eaea;
+}
+
+.navbar .nav-link {
+  color: #333 !important;
+}
+
+.navbar .nav-link:hover {
+  color: #52796f !important;
+}

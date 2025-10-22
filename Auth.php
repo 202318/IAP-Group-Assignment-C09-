@@ -1,30 +1,26 @@
 <?php
+namespace App\Auth;
+use App\Models\User;
+use App\Database;
+
 class Auth {
+    private \PDO $db;
+    private User $userModel;
+
     public function __construct() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        $this->db = Database::getConnection();
+        $this->userModel = new User();
     }
 
-    public function isLoggedIn() {
-        return isset($_SESSION['user_id']);
+    public function register(array $data): int {
+        $data['password_hash'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        return $this->userModel->create($data);
     }
 
-    public function currentUserId() {
-        return $_SESSION['user_id'] ?? null;
-    }
-
-    public function isAdmin() {
-        return !empty($_SESSION['is_admin']);
-    }
-
-    public function login($userId, $isAdmin = false) {
-        $_SESSION['user_id'] = $userId;
-        $_SESSION['is_admin'] = $isAdmin;
-    }
-
-    public function logout() {
-        session_destroy();
+    public function login(string $email, string $password): ?array {
+        $user = $this->userModel->findByEmail($email);
+        if (!$user) return null;
+        if (!password_verify($password, $user['password_hash'])) return null;
+        return $user;
     }
 }
-?>
