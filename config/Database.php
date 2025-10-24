@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = "127.0.0.1";
+    private $host = "127.0.0.1:8080";
     private $port = "3307"; // important: your phpMyAdmin URL shows port 3307
     private $db_name = "bookstore";
-    private $username = "root";
+    private $username = "rooter";
     private $password = "0000"; // if this fails, try an empty string ''
     public $conn;
 
