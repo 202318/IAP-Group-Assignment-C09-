@@ -12,4 +12,4 @@ A web-based bookstore that allows customers to browse and purchase books. Featur
 
 -Administrative functions: Employees can manage books, categories, publishers, and view order history.
 
--Built using PHP and MySQL with a responsive front-end interface.
+Built using PHP and MySQL with a responsive front-end interface.
