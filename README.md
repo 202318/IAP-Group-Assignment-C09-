@@ -1,5 +1,6 @@
 Online Bookstore
 A web-based bookstore that allows customers to browse and purchase books. Features include:
+
 -User management: Customers and employees with roles and authentication.
 -Book catalog: Organized by authors, categories, and publishers.
 -Orders & checkout: Customers can place orders, tracked via orders and order_items.
