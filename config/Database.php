@@ -1,23 +1,39 @@
 <?php
 class Database {
-    private $host = "127.0.0.1:8080";
-    private $port = "3307"; // important: your phpMyAdmin URL shows port 3307
-    private $db_name = "bookstore";
-    private $username = "rooter";
-    private $password = "0000"; // if this fails, try an empty string ''
-    public $conn;
+    private $host = 'localhost:3307';
+    private $db_name = 'bookstore';
+    private $username = 'root';
+    private $password = '0000';
+    private $conn;
 
     public function connect() {
         $this->conn = null;
+
         try {
-            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name}";
-            $this->conn = new PDO($dsn, $this->username, $this->password);
+            $this->conn = new PDO(
+                "mysql:host={$this->host};dbname={$this->db_name};charset=utf8",
+                $this->username,
+                $this->password
+            );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "<p style='color:green;'>✅ Connected successfully to bookstore DB!</p>";
+
+            // ✅ Test message for confirmation
+            echo "<div style='color:green;font-weight:bold'>
+                    ✅ Connected successfully to <b>{$this->db_name}</b> DB!
+                  </div>";
         } catch (PDOException $e) {
-            echo "<p style='color:red;'>❌ Connection error: " . $e->getMessage() . "</p>";
+            echo "<div style='color:red;font-weight:bold'>
+                    ❌ Connection Error: " . htmlspecialchars($e->getMessage()) . "
+                  </div>";
         }
+
         return $this->conn;
     }
+}
+
+// ✅ If this file is opened directly in browser, auto-run the test
+if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])) {
+    $db = new Database();
+    $db->connect();
 }
 ?>

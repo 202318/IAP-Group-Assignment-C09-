@@ -1,0 +1,82 @@
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f8f7;
+  color: #333;
+}
+
+.navbar {
+  background-color: #e4d9ff; /* pastel lavender */
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #5c4b99 !important;
+}
+
+.nav-link {
+  color: #5c4b99 !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #a678de !important;
+}
+
+/* Primary Buttons */
+.btn-primary {
+  background-color: #a678de;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #8e5dc2;
+}
+
+/* Secondary Button */
+.btn-outline-primary {
+  color: #5c4b99;
+  border-color: #a678de;
+}
+
+.btn-outline-primary:hover {
+  background-color: #a678de;
+  color: #fff;
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+  background-color: #e4d9ff;
+  color: #5c4b99;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 50px;
+}
+
+/* Shortcut Buttons on Home Page */
+.shortcut-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.shortcut-btns .btn {
+  min-width: 130px;
+  border-radius: 50px;
+  font-weight: 500;
+}
