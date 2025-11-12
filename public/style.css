@@ -2,7 +2,7 @@
 :root {
   --nude-primary: #f5e6da;
   --nude-secondary: #f0d9c0;
-  --nude-text: #2f2f2f;
+  --nude-text: #2f2f2f:
   --nude-btn: #d9b99b;
 }
 
