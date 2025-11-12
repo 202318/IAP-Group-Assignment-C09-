@@ -1,82 +1,302 @@
+/* === Nude Theme Enhancements === */
+:root {
+  --nude-primary: #f5e6da;
+  --nude-secondary: #f0d9c0;
+  --nude-text: #2f2f2f;
+  --nude-btn: #d9b99b;
+}
 
+/* Global text + layout */
 body {
+  color: var(--nude-text);
   font-family: 'Poppins', sans-serif;
-  background-color: #f9f8f7;
-  color: #333;
+  background-color: #ffffff;
 }
 
+/* Navbar */
 .navbar {
-  background-color: #e4d9ff; /* pastel lavender */
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-
-.navbar-brand {
-  font-weight: 600;
-  color: #5c4b99 !important;
-}
-
-.nav-link {
-  color: #5c4b99 !important;
-  font-weight: 500;
-}
-
 .nav-link:hover {
-  color: #a678de !important;
+  color: var(--nude-btn) !important;
 }
 
-/* Primary Buttons */
-.btn-primary {
-  background-color: #a678de;
+/* Buttons */
+.btn-nude {
+  background-color: var(--nude-btn);
+  color: #fff;
   border: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
-
-.btn-primary:hover {
-  background-color: #8e5dc2;
+.btn-nude:hover {
+  background-color: var(--nude-secondary);
+  color: #2f2f2f;
 }
-
-/* Secondary Button */
-.btn-outline-primary {
-  color: #5c4b99;
-  border-color: #a678de;
+.btn-outline-nude {
+  border: 1px solid var(--nude-btn);
+  color: var(--nude-btn);
+  transition: all 0.3s ease;
 }
-
-.btn-outline-primary:hover {
-  background-color: #a678de;
+.btn-outline-nude:hover {
+  background-color: var(--nude-btn);
   color: #fff;
 }
 
 /* Cards */
 .card {
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.card:hover {
-  transform: translateY(-3px);
+/* Hero sections */
+.hero {
+  background: linear-gradient(135deg, var(--nude-primary), var(--nude-secondary));
+  border-radius: 1rem;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.hero h1 {
+  font-weight: 700;
+  color: var(--nude-text);
+}
+.hero p {
+  color: #555;
+}
+
+/* Forms */
+.form-control {
+  border-radius: 0.6rem;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+}
+.form-control:focus {
+  border-color: var(--nude-btn);
+  box-shadow: 0 0 0 0.2rem rgba(217, 185, 155, 0.25);
 }
 
 /* Footer */
 footer {
-  background-color: #e4d9ff;
-  color: #5c4b99;
+  background-color: #fff;
+}
+
+/* === Nude Pastel Theme Enhancements === */
+:root{
+  --nude-primary: #f5e6da;
+  --nude-secondary: #f0d9c0;
+  --nude-accent: #d9b99b;
+  --nude-text: #2f2f2f;
+  --muted: #6b6b6b;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--nude-text);
+  background: #ffffff;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.navbar-brand { font-size: 1.05rem; }
+.nav-link { color: var(--nude-text) !important; }
+.nav-link:hover { color: var(--nude-accent) !important; }
+
+/* Buttons */
+.btn-nude {
+  background-color: var(--nude-accent);
+  color: #fff;
+  border: none;
+  border-radius: .6rem;
+  padding: .55rem 1rem;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn-nude:hover { background-color: var(--nude-secondary); color: var(--nude-text); transform: translateY(-2px); }
+
+.btn-outline-nude {
+  color: var(--nude-accent);
+  border: 1px solid var(--nude-accent);
+  border-radius: .6rem;
+  padding: .5rem .9rem;
+}
+.btn-outline-nude:hover { background: var(--nude-accent); color: #fff; }
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(0,0,0,0.06); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--nude-primary), #fff);
+  border-radius: 1rem;
+  padding: 3.5rem 2rem;
   text-align: center;
-  padding: 1rem 0;
-  margin-top: 50px;
+}
+.hero h1 { font-weight: 700; color: var(--nude-text); letter-spacing: .4px; }
+.hero p { color: var(--muted); margin-bottom: 1rem; }
+
+/* Forms */
+.form-control {
+  border-radius: .6rem;
+  border: 1px solid #e7e7e7;
+  padding: .65rem .95rem;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.15rem rgba(217,185,155,0.18);
+  border-color: var(--nude-accent);
 }
 
-/* Shortcut Buttons on Home Page */
-.shortcut-btns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
+/* Small helper */
+.small-muted { font-size: .85rem; color: var(--muted); }
+
+/* Footer */
+footer { background: #fff; color: var(--muted); }
+
+/* Responsive tweaks */
+@media (max-width: 767px){
+  .navbar { padding: .6rem 0.6rem; }
+  .hero { padding: 2rem 1rem; }
 }
 
-.shortcut-btns .btn {
-  min-width: 130px;
-  border-radius: 50px;
-  font-weight: 500;
+
+:root{
+  --nude-primary: #f5e6da;
+  --nude-secondary: #f0d9c0;
+  --nude-brown: #d9b99b; /* primary accent */
+  --nude-text: #2f2f2f;
+  --muted: #6b6b6b;
+  --card-bg: #fffaf6;
+}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--nude-text);
+  background: #ffffff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.navbar-brand { font-size: 1.05rem; }
+.nav-link { color: var(--nude-text) !important; }
+.nav-link:hover { color: var(--nude-brown) !important; }
+
+/* Buttons */
+.btn-nude {
+  background-color: var(--nude-brown);
+  color: #fff;
+  border: none;
+  border-radius: .6rem;
+  padding: .52rem .9rem;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-nude:hover { background-color: var(--nude-secondary); color: var(--nude-text); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+
+.btn-outline-nude {
+  color: var(--nude-brown);
+  border: 1px solid var(--nude-brown);
+  border-radius: .6rem;
+  padding: .45rem .85rem;
+}
+.btn-outline-nude:hover { background: var(--nude-brown); color: #fff; transform: translateY(-2px); }
+
+/* Cards and general containers */
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+  background: linear-gradient(180deg, #ffffff 0%, rgba(245,230,218,0.4) 100%);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(0,0,0,0.06); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--nude-primary), #fff);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.hero h1 { font-weight: 700; color: var(--nude-text); letter-spacing: .4px; }
+.hero p { color: var(--muted); margin-bottom: 1rem; }
+
+/* Forms - improved sizing and colors */
+.form-control {
+  border-radius: .6rem;
+  border: 1px solid #eee;
+  padding: .7rem .9rem;
+  background: #fff;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.12rem rgba(217,185,155,0.18);
+  border-color: var(--nude-brown);
+}
+
+/* Specific fixes for register sizing and colors */
+.register-wrapper .card {
+  background: #fff;
+}
+.register-wrapper .btn-nude {
+  font-size: 1rem;
+  padding: .65rem 1rem;
+  border-radius: .7rem;
+}
+
+/* Books grid styling - to override inconsistent original colors */
+.books-grid .card,
+.book-card {
+  background: #fff;
+  border-radius: .9rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.book-card img, .card img {
+  border-radius: .6rem;
+  max-height: 220px;
+  object-fit: cover;
+}
+
+/* Cart table / cart items - better contrast and background */
+.cart-card {
+  background: #fffaf6;
+  border-radius: .9rem;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.cart-table table {
+  width: 100%;
+}
+.cart-table th, .cart-table td {
+  vertical-align: middle;
+  padding: .75rem .5rem;
+}
+.cart-total {
+  background: var(--nude-primary);
+  border-radius: .6rem;
+  padding: .9rem;
+}
+
+/* Utility */
+.small-muted { font-size: .85rem; color: var(--muted); }
+.text-accent { color: var(--nude-brown); }
+
+/* Responsive tweaks */
+@media (max-width: 767px){
+  .navbar { padding: .6rem 0.6rem; }
+  .hero { padding: 1.75rem 1rem; }
+  .book-card img { max-height: 160px; }
 }
