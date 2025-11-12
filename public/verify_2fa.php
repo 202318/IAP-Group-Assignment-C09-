@@ -1,59 +1,85 @@
 <?php
-include '../includes/header.php';
-require_once '../config/Database.php';
-require_once '../classes/User.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use App\Auth\TwoFactor;
+use App\Database;
 
 session_start();
 
-$db = (new Database())->connect();
-$user = new User($db);
-
-$message = "";
-
-if (!isset($_SESSION['email_for_2fa'])) {
-    header("Location: login.php");
+// ✅ Ensure user came from login
+if (!isset($_SESSION['pending_2fa_user_id'])) {
+    header('Location: login.php');
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_SESSION['email_for_2fa'];
-    $code = trim($_POST['code']);
+try {
+    $pdo = Database::getInstance()->getConnection(); // ✅ Correct singleton usage
 
-   if ($user->verifyTwoFactor($email, $code)) {
-    $message = "<div class='alert alert-success'>✅ 2FA verified successfully! Redirecting to dashboard...</div>";
+    // ✅ Fetch the user's 2FA secret
+    $stmt = $pdo->prepare('SELECT * FROM user_2fa WHERE user_id = :uid AND enabled = 1 LIMIT 1');
+    $stmt->execute([':uid' => $_SESSION['pending_2fa_user_id']]);
+    $two = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Mark user as logged in
-    $_SESSION['logged_in'] = true;
+    $error = '';
 
-    // Optional: you can also store user info here
-    $_SESSION['user_email'] = $email;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $code = trim($_POST['code'] ?? '');
 
-    // Clean up 2FA temporary session
-    unset($_SESSION['email_for_2fa']);
-    unset($_SESSION['2fa_code']);
+        if ($two && TwoFactor::verifyCode($two['totp_secret'], $code)) {
+            // ✅ Regenerate session and complete login
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $_SESSION['pending_2fa_user_id'];
+            unset($_SESSION['pending_2fa_user_id']);
 
-    // Redirect after short delay
-    echo "<script>
-        setTimeout(() => {
-            window.location.href = 'dashboard.php';
-        }, 2000);
-    </script>";
-} else {
-    $message = "<div class='alert alert-danger'>❌ Invalid or expired code. Try again.</div>";
-}
+            header('Location: dashboard.php');
+            exit;
+        } else {
+            $error = '❌ Invalid or expired code. Please try again.';
+        }
+    }
+} catch (Exception $e) {
+    die("❌ Database error: " . htmlspecialchars($e->getMessage()));
 }
 ?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Verify 2FA - BookHaven</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-5">
+  <div class="container">
+    <div class="col-md-6 mx-auto">
+      <div class="card shadow-sm border-0 p-4">
+        <h2 class="mb-4 text-center">🔐 Two-Factor Verification</h2>
 
-<div class="container mt-5">
-  <h2>Two-Factor Verification</h2>
-  <?= $message; ?>
-  <form method="POST">
-    <div class="mb-3">
-      <label class="form-label">Enter 6-digit code</label>
-      <input type="text" name="code" class="form-control" maxlength="6" required>
+        <?php if (!empty($error)): ?>
+          <div class="alert alert-danger text-center"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+
+        <form method="post" class="text-center">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Enter 6-digit code</label>
+            <input 
+              name="code" 
+              class="form-control text-center" 
+              placeholder="123456" 
+              required 
+              pattern="\d{6}"
+              maxlength="6"
+            >
+          </div>
+
+          <button class="btn btn-primary w-100">Verify</button>
+        </form>
+
+        <div class="text-center mt-3">
+          <a href="login.php" class="text-decoration-none small">Back to Login</a>
+        </div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-success">Verify</button>
-  </form>
-</div>
+  </div>
+</body>
+</html>
 
-<?php include '../includes/footer.php'; ?>
