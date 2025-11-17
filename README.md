@@ -6,9 +6,7 @@ A web-based bookstore that allows customers to browse and purchase books. Featur
 
 -Book catalog: Organized by authors, categories, and publishers.
 
--Orders & checkout: Customers can place orders, tracked via orders and order_items.
-
--Inventory management: Stock changes tracked with inventory_log.
+-Orders & checkout: Customers can place orders and order_items.
 
 -Administrative functions: Employees can manage books, categories, publishers, and view order history.
 
